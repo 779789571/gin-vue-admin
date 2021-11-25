@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"github.com/urfave/cli/v2"
 	"time"
 
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
@@ -14,7 +15,7 @@ type server interface {
 	ListenAndServe() error
 }
 
-func RunWindowsServer() {
+func RunWindowsServer(ctx *cli.Context) error {
 	if global.GVA_CONFIG.System.UseMultipoint {
 		// 初始化redis服务
 		initialize.Redis()
@@ -45,4 +46,6 @@ func RunWindowsServer() {
 	如果项目让您获得了收益，希望您能请团队喝杯可乐:https://www.github.com/flipped-aurora/gin-vue-admin/server.com/docs/coffee
 `, address)
 	global.GVA_LOG.Error(s.ListenAndServe().Error())
+
+	return nil
 }

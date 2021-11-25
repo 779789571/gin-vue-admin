@@ -1,9 +1,13 @@
 package main
 
 import (
+	"github.com/flipped-aurora/gin-vue-admin/server/cmd"
 	"github.com/flipped-aurora/gin-vue-admin/server/core"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/initialize"
+	"github.com/urfave/cli/v2"
+	"go.uber.org/zap"
+	"os"
 )
 
 //go:generate go env -w GO111MODULE=on
@@ -29,5 +33,15 @@ func main() {
 		db, _ := global.GVA_DB.DB()
 		defer db.Close()
 	}
-	core.RunWindowsServer()
+	//core.RunWindowsServer()
+	app := cli.NewApp()
+	app.Name = "geranium"
+	app.Usage = "Scan for sensitive information easily and effectively."
+	app.Commands = []*cli.Command{&cmd.Web} //&cmd.Scan
+	app.Flags = append(app.Flags, cmd.Web.Flags...)
+	app.Flags = append(app.Flags) //cmd.Scan.Flags...
+	err := app.Run(os.Args)
+	if err != nil {
+		global.GVA_LOG.Error("app start error", zap.Any("err", err))
+	}
 }
