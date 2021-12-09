@@ -1,13 +1,13 @@
 package system
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/config"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	model "github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
-	"github.com/flipped-aurora/gin-vue-admin/server/source/example"
-	"github.com/flipped-aurora/gin-vue-admin/server/source/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/779789571/gin-vue-admin/server/config"
+	"github.com/779789571/gin-vue-admin/server/global"
+	model "github.com/779789571/gin-vue-admin/server/model/system"
+	"github.com/779789571/gin-vue-admin/server/model/system/request"
+	"github.com/779789571/gin-vue-admin/server/source/example"
+	"github.com/779789571/gin-vue-admin/server/source/system"
+	"github.com/779789571/gin-vue-admin/server/utils"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

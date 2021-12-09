@@ -1,10 +1,11 @@
-module github.com/flipped-aurora/gin-vue-admin/server
+module github.com/779789571/gin-vue-admin/server
 
 go 1.16
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.6+incompatible
+	github.com/buger/jsonparser v1.1.1
 	github.com/casbin/casbin/v2 v2.11.0
 	github.com/casbin/gorm-adapter/v3 v3.0.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

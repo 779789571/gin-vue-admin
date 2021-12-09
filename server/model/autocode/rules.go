@@ -2,13 +2,14 @@
 package autocode
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/global"
 )
 
 // Rules 结构体
 // 如果含有time.Time 请自行import time包
 type Rules struct {
 	global.GVA_MODEL
+	RuleName  string `json:"ruleName" form:"ruleName" gorm:"column:rule_name;comment:规则名称;type:varchar(100);"`
 	RuleType  *int   `json:"ruleType" form:"ruleType" gorm:"column:rule_type;comment:rule类型;type:int"`
 	Status    *int   `json:"status" form:"status" gorm:"column:status;comment:rule状态;type:int"`
 	IsDynamic *bool  `json:"isDynamic" form:"isDynamic" gorm:"column:is_dynamic;comment:是否为动态规则;type:tinyint"`

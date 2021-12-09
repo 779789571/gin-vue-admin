@@ -2,6 +2,9 @@
   <div>
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
+        <el-form-item label="规则名称">
+          <el-input v-model="searchInfo.ruleName" placeholder="搜索条件" />
+        </el-form-item>
         <el-form-item label="rule类型">
           <el-input v-model="searchInfo.ruleType" placeholder="搜索条件" />
         </el-form-item>
@@ -57,6 +60,7 @@
         <el-table-column align="left" label="日期" width="180">
             <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
+        <el-table-column align="left" label="规则名称" prop="ruleName" width="120" />
         <el-table-column align="left" label="rule类型" prop="ruleType" width="120">
             <template #default="scope">
             {{ filterDict(scope.row.ruleType,"toolsName") }}
@@ -67,10 +71,10 @@
             {{ filterDict(scope.row.status,"APIStatus") }}
             </template>
         </el-table-column>
-        <el-table-column align="left" label="是否为动态规则" prop="isDynamic" width="120">
+        <el-table-column align="left" label="动态规则" prop="isDynamic" width="120">
             <template #default="scope">{{ formatBoolean(scope.row.isDynamic) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="rule内容" prop="content" width="120" />
+        <el-table-column align="left" label="rule内容" prop="content" width="400" />
         <el-table-column align="left" label="备注" prop="desc" width="120" />
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
@@ -93,6 +97,9 @@
     </div>
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="80px">
+        <el-form-item label="规则名称:">
+          <el-input v-model="formData.ruleName" clearable placeholder="请输入" />
+        </el-form-item>
         <el-form-item label="rule类型:">
           <el-select v-model="formData.ruleType" placeholder="请选择" style="width:100%" clearable>
             <el-option v-for="(item,key) in toolsNameOptions" :key="key" :label="item.label" :value="item.value" />
@@ -103,8 +110,8 @@
             <el-option v-for="(item,key) in APIStatusOptions" :key="key" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="是否为动态规则:">
-          <el-switch v-model="formData.isDynamic" active-color="#13ce66" inactive-color="#ff4949" active-text="是" inactive-text="否" clearable ></el-switch>
+        <el-form-item label="动态规则:">
+          <el-switch v-model="formData.isDynamic" active-color="#13ce66" inactive-color="#ff4949" active-text="动态" inactive-text="静态" clearable ></el-switch>
         </el-form-item>
         <el-form-item label="rule内容:">
           <el-input v-model="formData.content" clearable placeholder="请输入" />
@@ -143,9 +150,10 @@ export default {
       type: '',
       deleteVisible: false,
       multipleSelection: [],
-      APIStatusOptions: [],
       toolsNameOptions: [],
+      APIStatusOptions: [],
       formData: {
+        ruleName: '',
         ruleType: undefined,
         status: undefined,
         isDynamic: false,
@@ -156,8 +164,8 @@ export default {
   },
   async created() {
     await this.getTableData()
-    await this.getDict('APIStatus')
     await this.getDict('toolsName')
+    await this.getDict('APIStatus')
   },
   methods: {
   onReset() {
@@ -221,6 +229,7 @@ export default {
     closeDialog() {
       this.dialogFormVisible = false
       this.formData = {
+        ruleName: '',
         ruleType: undefined,
         status: undefined,
         isDynamic: false,

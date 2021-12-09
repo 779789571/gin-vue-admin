@@ -1,21 +1,25 @@
 <template>
+
   <div>
     <div class="gva-search-box">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
         <el-form-item label="API类型">
-          <el-input v-model="searchInfo.apiType" placeholder="搜索条件"/>
+          <el-input v-model="searchInfo.apiType" placeholder="搜索条件" />
         </el-form-item>
         <el-form-item label="API状态">
-          <el-input v-model="searchInfo.status" placeholder="搜索条件"/>
+          <el-input v-model="searchInfo.status" placeholder="搜索条件" />
+        </el-form-item>
+        <el-form-item label="账号">
+          <el-input v-model="searchInfo.account" placeholder="搜索条件" />
         </el-form-item>
         <el-form-item label="次数限制">
-          <el-input v-model="searchInfo.limitTimes" placeholder="搜索条件"/>
+          <el-input v-model="searchInfo.limitTimes" placeholder="搜索条件" />
         </el-form-item>
         <el-form-item label="剩余次数">
-          <el-input v-model="searchInfo.remaingTimes" placeholder="搜索条件"/>
+          <el-input v-model="searchInfo.remaingTimes" placeholder="搜索条件" />
         </el-form-item>
         <el-form-item label="备注">
-          <el-input v-model="searchInfo.desc" placeholder="搜索条件"/>
+          <el-input v-model="searchInfo.desc" placeholder="搜索条件" />
         </el-form-item>
         <el-form-item>
           <el-button size="mini" type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
@@ -23,6 +27,7 @@
         </el-form-item>
       </el-form>
     </div>
+
     <div class="gva-table-box">
       <div class="gva-btn-list">
         <el-button size="mini" type="primary" icon="el-icon-plus" @click="openDialog">新增</el-button>
@@ -33,22 +38,25 @@
             <el-button size="mini" type="primary" @click="onDelete">确定</el-button>
           </div>
           <template #reference>
-            <el-button icon="el-icon-delete" size="mini" style="margin-left: 10px;"
-                       :disabled="!multipleSelection.length"
+            <el-button
+              icon="el-icon-delete"
+              size="mini"
+              style="margin-left: 10px;"
+              :disabled="!multipleSelection.length"
             >删除
             </el-button>
           </template>
         </el-popover>
       </div>
       <el-table
-          ref="multipleTable"
-          style="width: 100%"
-          tooltip-effect="dark"
-          :data="tableData"
-          row-key="ID"
-          @selection-change="handleSelectionChange"
+        ref="multipleTable"
+        style="width: 100%"
+        tooltip-effect="dark"
+        :data="tableData"
+        row-key="ID"
+        @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <el-table-column align="left" label="日期" width="180">
           <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
@@ -62,15 +70,19 @@
             {{ filterDict(scope.row.status, 'APIStatus') }}
           </template>
         </el-table-column>
-        <el-table-column align="left" label="api内容" prop="content" width="120"/>
-        <el-table-column align="left" label="次数限制" prop="limitTimes" width="120" />
-        <el-table-column align="left" label="剩余次数" prop="remaingTimes" width="120" >
-        </el-table-column>
-        <el-table-column align="left" label="备注" prop="desc" width="120"/>
+        <el-table-column align="left" label="账号（如有）" prop="account" width="120" />
+        <el-table-column align="left" label="api内容" prop="content" width="120" />
+        <el-table-column align="left" label="每日次数限制" prop="limitTimes" width="180" />
+        <el-table-column align="left" label="剩余次数" prop="remaingTimes" width="120" />
+        <el-table-column align="left" label="备注" prop="desc" width="120" />
         <el-table-column align="left" label="按钮组">
           <template #default="scope">
-            <el-button type="text" icon="el-icon-edit" size="small" class="table-button"
-                       @click="updateApiToken(scope.row)"
+            <el-button
+              type="text"
+              icon="el-icon-edit"
+              size="small"
+              class="table-button"
+              @click="updateApiToken(scope.row)"
             >变更
             </el-button>
             <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteRow(scope.row)">删除</el-button>
@@ -79,13 +91,13 @@
       </el-table>
       <div class="gva-pagination">
         <el-pagination
-            layout="total, sizes, prev, pager, next, jumper"
-            :current-page="page"
-            :page-size="pageSize"
-            :page-sizes="[10, 30, 50, 100]"
-            :total="total"
-            @current-change="handleCurrentChange"
-            @size-change="handleSizeChange"
+          layout="total, sizes, prev, pager, next, jumper"
+          :current-page="page"
+          :page-size="pageSize"
+          :page-sizes="[10, 30, 50, 100]"
+          :total="total"
+          @current-change="handleCurrentChange"
+          @size-change="handleSizeChange"
         />
       </div>
     </div>
@@ -93,25 +105,28 @@
       <el-form :model="formData" label-position="right" label-width="80px">
         <el-form-item label="API类型:">
           <el-select v-model="formData.apiType" placeholder="请选择" style="width:100%" clearable>
-            <el-option v-for="(item,key) in apiNameOptions" :key="key" :label="item.label" :value="item.value"/>
+            <el-option v-for="(item,key) in apiNameOptions" :key="key" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="API状态:">
           <el-select v-model="formData.status" placeholder="请选择" style="width:100%" clearable>
-            <el-option v-for="(item,key) in APIStatusOptions" :key="key" :label="item.label" :value="item.value"/>
+            <el-option v-for="(item,key) in APIStatusOptions" :key="key" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="api内容:">
-          <el-input v-model="formData.content" clearable placeholder="请输入"/>
+        <el-form-item label="账号(如有):">
+          <el-input v-model="formData.account" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="apitoken内容:">
+          <el-input v-model="formData.content" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="次数限制:">
-          <el-input v-model.number="formData.limitTimes" clearable placeholder="请输入"/>
+          <el-input v-model.number="formData.limitTimes" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="剩余次数:">
-          <el-input v-model.number="formData.remaingTimes" clearable placeholder="请输入"/>
+          <el-input v-model.number="formData.remaingTimes" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="备注:">
-          <el-input v-model="formData.desc" clearable placeholder="请输入"/>
+          <el-input v-model="formData.desc" clearable placeholder="请输入" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -150,6 +165,7 @@ export default {
       formData: {
         apiType: undefined,
         status: undefined,
+        account: '',
         content: '',
         limitTimes: 0,
         remaingTimes: 0,
@@ -167,7 +183,11 @@ export default {
       this.searchInfo = {}
     },
     // todo 表头添加帮助符号
-
+    // renderHeaderMethods({ column }) {
+    //   const test = '？'
+    //   // return (<el-tooltip content={column.label()} placement='top-start'> <span>表头标题</span> </el-tooltip>)
+    //   return (h('el-tooltip',{content:'pop',placement:'top'},'表头标题'))
+    // },
     // apiinfo(h){}, // todo
     // 条件搜索前端看此方法
     onSubmit() {
@@ -226,6 +246,7 @@ export default {
       this.formData = {
         apiType: undefined,
         status: undefined,
+        account: '',
         content: '',
         limitTimes: 0,
         remaingTimes: 0,
@@ -276,5 +297,4 @@ export default {
 </script>
 
 <style>
-
 </style>

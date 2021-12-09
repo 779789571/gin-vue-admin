@@ -56,6 +56,14 @@ export default {
         this.pageSize = table.data.pageSize
       }
       afterFunc()
+    },
+    formatDateWithoutTime: function(time) {
+      if (time !== null && time !== '') {
+        var date = new Date(time)
+        return formatTimeToStr(date, 'yyyy-MM-dd')
+      } else {
+        return ''
+      }
     }
   }
 }

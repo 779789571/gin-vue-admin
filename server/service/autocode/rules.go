@@ -1,10 +1,10 @@
 package autocode
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/autocode"
-	autoCodeReq "github.com/flipped-aurora/gin-vue-admin/server/model/autocode/request"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/autocode"
+	autoCodeReq "github.com/779789571/gin-vue-admin/server/model/autocode/request"
+	"github.com/779789571/gin-vue-admin/server/model/common/request"
 )
 
 type RulesService struct {
@@ -54,6 +54,9 @@ func (rulesService *RulesService) GetRulesInfoList(info autoCodeReq.RulesSearch)
 	db := global.GVA_DB.Model(&autocode.Rules{})
 	var ruless []autocode.Rules
 	// 如果有条件搜索 下方会自动创建搜索语句
+	if info.RuleName != "" {
+		db = db.Where("rule_name LIKE ?", "%"+info.RuleName+"%")
+	}
 	if info.RuleType != nil {
 		db = db.Where("rule_type = ?", info.RuleType)
 	}
@@ -72,4 +75,11 @@ func (rulesService *RulesService) GetRulesInfoList(info autoCodeReq.RulesSearch)
 	}
 	err = db.Limit(limit).Offset(offset).Find(&ruless).Error
 	return err, ruless, total
+}
+
+func GetValidRulesByType(ruleType int) (err error, list []autocode.Rules) {
+	var ruless []autocode.Rules
+	db := global.GVA_DB.Model(&autocode.Rules{})
+	err = db.Where("rule_type = ?", ruleType).Find(&ruless).Error
+	return err, ruless
 }

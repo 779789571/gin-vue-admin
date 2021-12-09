@@ -1,10 +1,12 @@
 package autocode
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/autocode"
-	autoCodeReq "github.com/flipped-aurora/gin-vue-admin/server/model/autocode/request"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
+	"errors"
+	"fmt"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/autocode"
+	autoCodeReq "github.com/779789571/gin-vue-admin/server/model/autocode/request"
+	"github.com/779789571/gin-vue-admin/server/model/common/request"
 )
 
 type ApiTokenService struct {
@@ -60,6 +62,9 @@ func (apiTokenService *ApiTokenService) GetApiTokenInfoList(info autoCodeReq.Api
 	if info.Status != nil {
 		db = db.Where("status = ?", info.Status)
 	}
+	if info.Account != "" {
+		db = db.Where("account LIKE ?", "%"+info.Account+"%")
+	}
 	if info.LimitTimes != nil {
 		db = db.Where("limit_times > ?", info.LimitTimes)
 	}
@@ -75,4 +80,32 @@ func (apiTokenService *ApiTokenService) GetApiTokenInfoList(info autoCodeReq.Api
 	}
 	err = db.Limit(limit).Offset(offset).Find(&apiTokens).Error
 	return err, apiTokens, total
+}
+
+//map[string]string map[token]备注 备注相同为同组key与secret
+func GetApiToken(api_type int) (error, interface{}, interface{}, interface{}) {
+	var apiTokens []autocode.ApiToken
+	db := global.GVA_DB.Model(&autocode.ApiToken{})
+	db = db.Where("api_type = ?", api_type).Where("status = ?", 1)
+	err := db.Find(&apiTokens).Error
+	if err != nil {
+		return err, nil, nil, nil
+	}
+	if len(apiTokens) == 0 {
+		return errors.New(fmt.Sprintf("没找到%v 的token信息", api_type)), "", "", 0
+	}
+	if len(apiTokens) == 1 {
+		return nil, apiTokens[0].Account, apiTokens[0].Content, *apiTokens[0].LimitTimes
+	}
+	var accountList []string
+	var keyList []string
+	var limitTimesList []int
+	for _, v := range apiTokens {
+		if v.Account != "" {
+			accountList = append(accountList, v.Account)
+		}
+		keyList = append(keyList, v.Content)
+		limitTimesList = append(limitTimesList, *v.LimitTimes)
+	}
+	return nil, accountList, keyList, limitTimesList
 }

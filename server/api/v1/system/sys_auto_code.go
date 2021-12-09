@@ -6,10 +6,10 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/common/response"
+	"github.com/779789571/gin-vue-admin/server/model/system"
+	"github.com/779789571/gin-vue-admin/server/utils"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

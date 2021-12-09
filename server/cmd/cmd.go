@@ -1,7 +1,8 @@
 package cmd
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/core"
+	"github.com/779789571/gin-vue-admin/server/collect"
+	"github.com/779789571/gin-vue-admin/server/core"
 
 	"github.com/urfave/cli/v2"
 )
@@ -25,22 +26,29 @@ var Web = cli.Command{
 	},
 }
 
-//
-//var Scan = cli.Command{
-//	Name:        "scan",
-//	Usage:       "Start to scan leak info",
-//	Description: "start to scan leak info",
-//	Action:      search.Scan,
-//	Flags: []cli.Flag{
-//		&cli.StringFlag{
-//			Name:  "mode, m",
-//			Value: "github",
-//			Usage: "scan mode: github, searchcode, gitlab, all",
-//		},
-//		&cli.IntFlag{
-//			Name:  "time, t",
-//			Value: 900,
-//			Usage: "scan interval(second)",
-//		},
-//	},
-//}
+var Scan = cli.Command{
+	Name:        "scan",
+	Usage:       "Start to scan ",
+	Description: "start to scan",
+	Action:      collect.Scanner,
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:    "plugins",
+			Aliases: []string{"p"},
+			Value:   "",
+			Usage:   "scan plugins: online,vulner,gather all",
+		},
+		&cli.IntFlag{
+			Name:    "time",
+			Aliases: []string{"t"},
+			Value:   24,
+			Usage:   "scan interval(hour)",
+		},
+		&cli.StringFlag{
+			Name:    "proxy",
+			Aliases: []string{"px"},
+			Value:   "",
+			Usage:   "web proxy",
+		},
+	},
+}

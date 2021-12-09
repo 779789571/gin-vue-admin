@@ -3,9 +3,9 @@ package system
 import (
 	"errors"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/common/request"
+	"github.com/779789571/gin-vue-admin/server/model/system"
 
 	"gorm.io/gorm"
 )

@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="gva-form-box">
-      <el-form :model="formData" label-position="right" label-width="80px">
+      <el-form :model="formData" label-position="right" label-width="100px">
+        <el-form-item label="规则名称:">
+          <el-input v-model="formData.ruleName" clearable placeholder="请输入" />
+        </el-form-item>
         <el-form-item label="rule类型:">
           <el-select v-model="formData.ruleType" placeholder="请选择" clearable>
             <el-option v-for="(item,key) in toolsNameOptions" :key="key" :label="item.label" :value="item.value" />
@@ -12,8 +15,8 @@
             <el-option v-for="(item,key) in APIStatusOptions" :key="key" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="是否为动态规则:">
-          <el-switch v-model="formData.isDynamic" active-color="#13ce66" inactive-color="#ff4949" active-text="是" inactive-text="否" clearable ></el-switch>
+        <el-form-item label="动态规则:">
+          <el-switch v-model="formData.isDynamic" active-color="#13ce66" inactive-color="#ff4949" active-text="动态" inactive-text="静态" clearable ></el-switch>
         </el-form-item>
         <el-form-item label="rule内容:">
           <el-input v-model="formData.content" clearable placeholder="请输入" />
@@ -43,9 +46,10 @@ export default {
   data() {
     return {
       type: '',
-      APIStatusOptions: [],
       toolsNameOptions: [],
+      APIStatusOptions: [],
       formData: {
+        ruleName: '',
         ruleType: undefined,
         status: undefined,
         isDynamic: false,
@@ -65,8 +69,8 @@ export default {
     } else {
       this.type = 'create'
     }
-    await this.getDict('APIStatus')
     await this.getDict('toolsName')
+    await this.getDict('APIStatus')
   },
   methods: {
     async save() {

@@ -12,6 +12,9 @@
             <el-option v-for="(item,key) in APIStatus" :key="key" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
+        <el-form-item label="账号(如有):">
+          <el-input v-model="formData.account" clearable placeholder="请输入" />
+        </el-form-item>
         <el-form-item label="api内容:">
           <el-input v-model="formData.content" clearable placeholder="请输入" />
         </el-form-item>
@@ -51,6 +54,7 @@ export default {
       formData: {
         apiType: undefined,
         status: undefined,
+        account: '',
         content: '',
         limitTimes: 0,
         remaingTimes: 0,

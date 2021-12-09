@@ -2,9 +2,9 @@ package utils
 
 import (
 	"errors"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/system/request"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 	"time"
 )
 
