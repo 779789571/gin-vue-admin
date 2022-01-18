@@ -1,12 +1,13 @@
 package system
 
 import (
-	"github.com/779789571/gin-vue-admin/server/global"
-	"github.com/779789571/gin-vue-admin/server/model/system"
+	"reflect"
+
+	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"reflect"
 )
 
 var DataAuthorities = new(dataAuthorities)

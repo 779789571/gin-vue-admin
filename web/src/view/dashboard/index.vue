@@ -9,17 +9,26 @@
             <el-row>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <i class="el-icon-sort icon" />今日流量 (1231231)
+                  <el-icon class="dasboard-icon">
+                    <sort />
+                  </el-icon>
+                  今日流量 (1231231)
                 </div>
               </el-col>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <i class="el-icon-s-custom icon" />总用户数 (24001)
+                  <el-icon class="dasboard-icon">
+                    <avatar />
+                  </el-icon>
+                  总用户数 (24001)
                 </div>
               </el-col>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <i class="el-icon-s-comment icon" />好评率 (99%)
+                  <el-icon class="dasboard-icon">
+                    <comment />
+                  </el-icon>
+                  好评率 (99%)
                 </div>
               </el-col>
             </el-row>
@@ -64,7 +73,9 @@
           >
             <div class="quick-entrance-item">
               <div class="quick-entrance-item-icon" :style="{ backgroundColor: card.bg }">
-                <i :class="card.icon" :style="{ color: card.color }" />
+                <el-icon>
+                  <component :is="card.icon" :style="{ color: card.color }" />
+                </el-icon>
               </div>
               <p>{{ card.label }}</p>
             </div>
@@ -92,68 +103,68 @@
     </div>
   </div>
 </template>
-<script>
+
+<script setup>
 import echartsLine from '@/view/dashboard/dashboardCharts/echartsLine.vue'
 import dashboardTable from '@/view/dashboard/dashboardTable/dashboardTable.vue'
-export default {
-  name: 'Dashboard',
-  components: {
-    echartsLine,
-    dashboardTable
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const toolCards = ref([
+  {
+    label: '用户管理',
+    icon: 'monitor',
+    name: 'user',
+    color: '#ff9c6e',
+    bg: 'rgba(255, 156, 110,.3)'
   },
-  data() {
-    return {
-      toolCards: [
-        {
-          label: '用户管理',
-          icon: 'el-icon el-icon-monitor',
-          name: 'user',
-          color: '#ff9c6e',
-          bg: 'rgba(255, 156, 110,.3)'
-        },
-        {
-          label: '角色管理',
-          icon: 'el-icon el-icon-setting',
-          name: 'authority',
-          color: '#69c0ff',
-          bg: 'rgba(105, 192, 255,.3)'
-        },
-        {
-          label: '菜单管理',
-          icon: 'el-icon el-icon-menu',
-          name: 'menu',
-          color: '#b37feb',
-          bg: 'rgba(179, 127, 235,.3)'
-        },
-        {
-          label: '代码生成器',
-          icon: ' el-icon-cpu',
-          name: 'autoCode',
-          color: '#ffd666',
-          bg: 'rgba(255, 214, 102,.3)'
-        },
-        {
-          label: '表单生成器',
-          icon: 'el-icon-document-checked',
-          name: 'formCreate',
-          color: '#ff85c0',
-          bg: 'rgba(255, 133, 192,.3)'
-        },
-        {
-          label: '关于我们',
-          icon: ' el-icon-user',
-          name: 'about',
-          color: '#5cdbd3',
-          bg: 'rgba(92, 219, 211,.3)'
-        }
-      ]
-    }
+  {
+    label: '角色管理',
+    icon: 'setting',
+    name: 'authority',
+    color: '#69c0ff',
+    bg: 'rgba(105, 192, 255,.3)'
   },
-  methods: {
-    toTarget(name) {
-      this.$router.push({ name })
-    }
+  {
+    label: '菜单管理',
+    icon: 'menu',
+    name: 'menu',
+    color: '#b37feb',
+    bg: 'rgba(179, 127, 235,.3)'
+  },
+  {
+    label: '代码生成器',
+    icon: 'cpu',
+    name: 'autoCode',
+    color: '#ffd666',
+    bg: 'rgba(255, 214, 102,.3)'
+  },
+  {
+    label: '表单生成器',
+    icon: 'document-checked',
+    name: 'formCreate',
+    color: '#ff85c0',
+    bg: 'rgba(255, 133, 192,.3)'
+  },
+  {
+    label: '关于我们',
+    icon: 'user',
+    name: 'about',
+    color: '#5cdbd3',
+    bg: 'rgba(92, 219, 211,.3)'
   }
+])
+
+const router = useRouter()
+
+const toTarget = (name) => {
+  router.push({ name })
+}
+
+</script>
+<script>
+export default {
+  name: 'Dashboard'
 }
 </script>
 
@@ -271,7 +282,7 @@ export default {
       padding: 14px;
     }
 }
-.icon {
+.dasboard-icon {
     font-size: 20px;
     color: rgb(85, 160, 248);
     width: 30px;
@@ -307,7 +318,7 @@ export default {
                 line-height: 20px;
             }
         }
-        .icon {
+        .dasboard-icon {
             font-size: 18px;
         }
     }

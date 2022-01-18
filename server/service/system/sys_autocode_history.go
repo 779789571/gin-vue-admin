@@ -3,15 +3,16 @@ package system
 import (
 	"errors"
 	"fmt"
-	"github.com/779789571/gin-vue-admin/server/model/system/response"
 	"path/filepath"
 	"strings"
 	"time"
 
-	"github.com/779789571/gin-vue-admin/server/global"
-	"github.com/779789571/gin-vue-admin/server/model/common/request"
-	"github.com/779789571/gin-vue-admin/server/model/system"
-	"github.com/779789571/gin-vue-admin/server/utils"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system/response"
+
+	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
+	"github.com/flipped-aurora/gin-vue-admin/server/utils"
 
 	"go.uber.org/zap"
 )
@@ -79,7 +80,6 @@ func (autoCodeHistoryService *AutoCodeHistoryService) RollBack(info *request.Get
 			// 删除表
 			if err = AutoCodeServiceApp.DropTable(name.TableName); err != nil {
 				global.GVA_LOG.Error("ClearTag DropTable:", zap.Error(err))
-
 			}
 		}
 	}

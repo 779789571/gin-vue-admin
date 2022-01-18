@@ -29,7 +29,6 @@ func GetUserID(c *gin.Context) uint {
 		waitUse := claims.(*systemReq.CustomClaims)
 		return waitUse.ID
 	}
-
 }
 
 // 从Gin的Context中获取从jwt解析出来的用户UUID
