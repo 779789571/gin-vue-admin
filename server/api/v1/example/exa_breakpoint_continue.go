@@ -7,10 +7,10 @@ import (
 	"mime/multipart"
 	"strconv"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	exampleRes "github.com/flipped-aurora/gin-vue-admin/server/model/example/response"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/common/response"
+	exampleRes "github.com/779789571/gin-vue-admin/server/model/example/response"
+	"github.com/779789571/gin-vue-admin/server/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -128,7 +128,7 @@ func (u *FileUploadAndDownloadApi) RemoveChunk(c *gin.Context) {
 	c.ShouldBindJSON(&file)
 	err := utils.RemoveChunk(file.FileMd5)
 	if err != nil {
-		global.GVA_LOG.Error("缓存切片删除失败!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 	err = fileUploadAndDownloadService.DeleteFileChunk(file.FileMd5, file.FileName, file.FilePath)

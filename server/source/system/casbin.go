@@ -1,8 +1,8 @@
 package system
 
 import (
+	"github.com/779789571/gin-vue-admin/server/global"
 	adapter "github.com/casbin/gorm-adapter/v3"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
@@ -48,11 +48,18 @@ func (c *casbin) Initialize() error {
 
 		{PType: "p", V0: "888", V1: "/user/getUserInfo", V2: "GET"},
 		{PType: "p", V0: "888", V1: "/user/setUserInfo", V2: "PUT"},
+		{PType: "p", V0: "888", V1: "/user/setSelfInfo", V2: "PUT"},
 		{PType: "p", V0: "888", V1: "/user/getUserList", V2: "POST"},
 		{PType: "p", V0: "888", V1: "/user/deleteUser", V2: "DELETE"},
 		{PType: "p", V0: "888", V1: "/user/changePassword", V2: "POST"},
 		{PType: "p", V0: "888", V1: "/user/setUserAuthority", V2: "POST"},
 		{PType: "p", V0: "888", V1: "/user/setUserAuthorities", V2: "POST"},
+		{PType: "p", V0: "888", V1: "/user/resetPassword", V2: "POST"},
+
+		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/findFile", V2: "GET"},
+		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/breakpointContinueFinish", V2: "POST"},
+		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/breakpointContinue", V2: "POST"},
+		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/removeChunk", V2: "POST"},
 
 		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/findFile", V2: "GET"},
 		{PType: "p", V0: "888", V1: "/fileUploadAndDownload/breakpointContinueFinish", V2: "POST"},

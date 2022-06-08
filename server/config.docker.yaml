@@ -1,4 +1,4 @@
-# github.com/flipped-aurora/gin-vue-admin/server Global Configuration
+# github.com/779789571/gin-vue-admin/server Global Configuration
 
 # jwt configuration
 jwt:
@@ -10,7 +10,7 @@ jwt:
 zap:
   level: 'info'
   format: 'console'
-  prefix: '[github.com/flipped-aurora/gin-vue-admin/server]'
+  prefix: '[github.com/779789571/gin-vue-admin/server]'
   director: 'log'
   link-name: 'latest_log'
   show-line: true
@@ -110,7 +110,15 @@ tencent-cos:
   secret-id: 'xxxxxxxx'
   secret-key: 'xxxxxxxx'
   base-url: 'https://gin.vue.admin'
-  path-prefix: 'github.com/flipped-aurora/gin-vue-admin/server'
+  path-prefix: 'github.com/779789571/gin-vue-admin/server'
+
+# huawei obs configuration
+hua-wei-obs:
+  path: 'you-path'
+  bucket: 'you-bucket'
+  endpoint: 'you-endpoint'
+  access-key: 'you-access-key'
+  secret-key: 'you-secret-key'
 
 # huawei obs configuration
 hua-wei-obs:

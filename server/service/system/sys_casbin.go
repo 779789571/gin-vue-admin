@@ -4,11 +4,11 @@ import (
 	"errors"
 	"sync"
 
+	"github.com/779789571/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/model/system"
+	"github.com/779789571/gin-vue-admin/server/model/system/request"
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 	_ "github.com/go-sql-driver/mysql"
 )
 

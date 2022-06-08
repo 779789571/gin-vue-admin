@@ -3,7 +3,7 @@ package utils
 import (
 	"os"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/779789571/gin-vue-admin/server/global"
 	"go.uber.org/zap"
 )
 
