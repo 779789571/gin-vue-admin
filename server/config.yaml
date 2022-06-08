@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # github.com/flipped-aurora/gin-vue-admin/server Global Configuration
 
 # jwt configuration
@@ -113,6 +114,18 @@ autocode:
   # root 自动适配项目根目录
   # 请不要手动配置,他会在项目加载的时候识别出根路径
   root: ""
+=======
+aliyun-oss:
+  endpoint: yourEndpoint
+  access-key-id: yourAccessKeyId
+  access-key-secret: yourAccessKeySecret
+  bucket-name: yourBucketName
+  bucket-url: yourBucketUrl
+  base-path: yourBasePath
+autocode:
+  transfer-restart: true
+  root: /Users/jhin/go_learning_project/gin-vue-admin
+>>>>>>> Stashed changes
   server: /server
   server-api: /api/v1/autocode
   server-initialize: /initialize
@@ -124,16 +137,48 @@ autocode:
   web-api: /api
   web-form: /view
   web-table: /view
-
-# qiniu configuration (请自行七牛申请对应的 公钥 私钥 bucket 和 域名地址)
+  web-flow: /view
+captcha:
+  key-long: 6
+  img-width: 240
+  img-height: 80
+casbin:
+  model-path: ./resource/rbac_model.conf
+email:
+  to: xxx@qq.com
+  port: 465
+  from: xxx@163.com
+  host: smtp.163.com
+  is-ssl: true
+  secret: xxx
+  nickname: test
+excel:
+  dir: ./resource/excel/
+jwt:
+  signing-key: qmPlus
+  expires-time: 604800
+  buffer-time: 86400
+local:
+  path: uploads/file
+mysql:
+  path: 127.0.0.1:3306
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: testGojinx
+  username: root
+  password: Aa779789571
+  max-idle-conns: 0
+  max-open-conns: 0
+  log-mode: ""
+  log-zap: false
 qiniu:
-  zone: 'ZoneHuaDong'
-  bucket: ''
-  img-path: ''
+  zone: ZoneHuaDong
+  bucket: ""
+  img-path: ""
   use-https: false
-  access-key: ''
-  secret-key: ''
+  access-key: ""
+  secret-key: ""
   use-cdn-domains: false
+<<<<<<< Updated upstream
 
 # aliyun oss configuration
 aliyun-oss:
@@ -194,3 +239,39 @@ cors:
       allow-methods: GET, POST
       expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
       allow-credentials: true # 布尔值
+=======
+redis:
+  db: 0
+  addr: 127.0.0.1:6379
+  password: ""
+system:
+  env: public
+  addr: 8888
+  db-type: mysql
+  oss-type: local
+  use-multipoint: false
+tencent-cos:
+  bucket: xxxxx-10005608
+  region: ap-shanghai
+  secret-id: xxxxxxxx
+  secret-key: xxxxxxxx
+  base-url: https://gin.vue.admin
+  path-prefix: gin-vue-admin
+timer:
+  start: true
+  spec: '@daily'
+  detail:
+  - tableName: sys_operation_records
+    compareField: created_at
+    interval: 2160h
+zap:
+  level: info
+  format: console
+  prefix: '[GIN-VUE-ADMIN]'
+  director: log
+  link-name: latest_log
+  showLine: true
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  log-in-console: true
+>>>>>>> Stashed changes
